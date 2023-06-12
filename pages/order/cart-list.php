@@ -1,6 +1,6 @@
 <?php
   // make sure the user is logged in
-  if ( !isEditorOrAdmin() ) {
+  if ( !isUserLoggedIn() ) {
     header("Location: /");
     exit;
   }
@@ -42,12 +42,7 @@
 ?>
     <div class="container mx-auto my-5" style="max-width: 700px;">
       <div class="d-flex justify-content-between align-items-center mb-2">
-        <h1 class="h1">Manage Posts</h1>
-        <div class="text-end">
-          <a href="/manage-posts-add" class="btn btn-primary btn-sm"
-            >Add New Post</a
-          >
-        </div>
+        <h1 class="h1">Cart List</h1>
       </div>
       <div class="card mb-2 p-4">
       <?php require "parts/message_success.php"; ?>
@@ -56,8 +51,8 @@
             <tr>
               <th scope="col">ID</th>
               <th scope="col" style="width: 20%;">Title</th>
-              <th scope="col">Created By</th>
-              <th scope="col">Status</th>
+              <th scope="col"></th>
+              <th scope="col"></th>
               <th scope="col" class="text-end">Actions</th>
             </tr>
           </thead>
@@ -142,4 +137,3 @@
 
 <?php
   require "parts/footer.php";
-

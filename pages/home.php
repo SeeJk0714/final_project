@@ -12,13 +12,13 @@
   <nav class="d-flex">
     <h1 class="h1 mb-4">My Shop</h1>
     <div class="mt-4 ms-auto gap-3">
-      <?php if ( isUserLoggedIn() ) { ?>
+      <?php if ( isUserLoggedIn() ) : ?>
         <a href="/logout" class="btn btn-danger btn-sm">Logout</a>
         <a href="/dashboard" class="btn btn-success btn-sm">dashboard</a>
-      <?php } else { ?>
+      <?php else : ?>
         <a href="/login" class="btn btn-primary btn-sm">Login</a>
         <a href="/signup" class="btn btn-success btn-sm">Sign Up</a>
-      <?php } ?>
+      <?php endif; ?>
     </div>
   </nav>
   <div class="container mx-auto mb-5" style="max-width: 900px;">
@@ -30,11 +30,14 @@
             src="<?= $post['image_url']; ?>"
             class="card-img-top"
             alt="Product <?= $post['id']; ?>"
+            style="height: 250px;"
           />
-          <h5 class="card-title"><?= $post['title']; ?></h5>
-          <p class="card-text">
-            <?= $post['content']; ?>
-          </p>
+          <div class="container">
+            <h5 class="card-title"><?= $post['title']; ?></h5>
+            <p class="card-text">
+              <?= $post['content']; ?>
+            </p>
+          </div>
           <div class="text-end">
             <a href="/post?id=<?= $post['id']; ?>" class="btn btn-sm">Read More</a>
           </div>

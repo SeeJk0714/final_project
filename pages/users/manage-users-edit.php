@@ -1,10 +1,10 @@
 <?php
    // check if the current user is an admin or not
-  if(!isAdmin()){
-    // if current user is not an admin, redirect to dashboard
-      header("Location: /dashboard");
-      exit;
-    }
+  // if(!isAdmin()){
+  //   // if current user is not an admin, redirect to dashboard
+  //     header("Location: /dashboard");
+  //     exit;
+  //   }
 
    // make sure the id parameter is available in the url
    if ( isset( $_GET['id'] ) ) {
@@ -57,7 +57,9 @@
               <option value="">Select an option</option>
               <option value="user" <?= $user['role'] === 'user' ? 'selected' : ''; ?>>User</option>
               <option value="editor"<?= $user['role'] === 'editor' ? 'selected' : ''; ?>>Editor</option>
-              <option value="admin" <?= $user['role'] === 'admin' ? 'selected' : ''; ?>>Admin</option>
+              <?php if(isAdmin()) :?>
+                <option value="admin" <?= $user['role'] === 'admin' ? 'selected' : ''; ?>>Admin</option>
+              <?php endif ;?>
             </select>
           </div>
           <div class="d-grid">

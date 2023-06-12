@@ -1,29 +1,42 @@
 <?php
   
   // check if the current user is an admin or not
-  if(!isAdmin()){
+  if(!isUserLoggedIn()){
   // if current user is not an admin, redirect to dashboard
     header("Location: /dashboard");
     exit;
   }
 
   $database = connectToDB();
-  
-  $sql = 'SELECT * FROM users';
-  $query = $database->prepare($sql);
-  $query->execute();
+
+  if ( isAdmin()){
+    $_SESSION['usertitle'] = "Manage Users";
+    $sql = 'SELECT * FROM users';
+    $query = $database->prepare($sql);
+    $query->execute();
+
+  }else{
+    $_SESSION['usertitle'] = "User Edit";
+    $sql = 'SELECT * FROM users WHERE id = :id';
+    $query = $database->prepare($sql);
+    $query->execute([
+      'id' => $_SESSION["user"]["id"]
+    ]);
+  }
   $users = $query->fetchAll();
 
   require "parts/header.php";
 ?>
     <div class="container mx-auto my-5" style="max-width: 700px;">
       <div class="d-flex justify-content-between align-items-center mb-2">
-        <h1 class="h1">Manage Users</h1>
-        <div class="text-end">
-          <a href="/manage-users-add" class="btn btn-primary btn-sm"
-            >Add New User</a
-          >
-        </div>
+        <h1 class="h1"><?= $_SESSION['usertitle']; ?></h1>
+        <?php if(isAdmin()) :?>
+          <div class="text-end">
+            <a href="/manage-users-add" class="btn btn-primary btn-sm"
+              >Add New User</a
+            >
+          </div>
+        <?php endif ;?>
       </div>
       <div class="card mb-2 p-4">
         <?php require "parts/message_success.php"; ?>

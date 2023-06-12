@@ -22,15 +22,23 @@ if ( isset( $_GET['id'] ) ) {
 
   require "parts/header.php";
 ?>
+    <div class=" mt-3">
+      <a href="/" class="btn btn-primary btn-sm"
+        ><i class="bi bi-arrow-left"></i> Back</a
+      >
+    </div>
     <div class="container mx-auto my-5" >
       <h1 class="h1 mb-4"><?= $posts['title']; ?></h1>
       <div class='d-flex'>
         <div>
-          <img src="<?= $posts['image_url']; ?>" alt="<?= $posts['title']; ?>.image">
+          <img src="<?= $posts['image_url']; ?>" alt="<?= $posts['title']; ?>.image" style="height: 400px;">
           <p class="fs-1"><?= $posts['content']; ?></p>
           <div class=" mt-3">
             <a href="/" class="btn btn-primary btn-sm"
-              ><i class="bi bi-arrow-left"></i> Back</a
+              ><i class=""></i> Add to Cart</a
+            >
+            <a href="/" class="btn btn-primary btn-sm"
+              ><i class=""></i> Buy Now</a
             >
           </div>
         </div>

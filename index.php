@@ -85,6 +85,13 @@ switch($path){
     case 'manage-users-changepwd':
         require 'pages/users/manage-users-changepwd.php';
         break;
+    //order
+    case 'cart-list':
+        require 'pages/order/cart-list.php';
+        break;
+    case 'order-list':
+        require 'pages/order/order-list.php';
+        break;
     default:
         require 'pages/home.php';
         break;
