@@ -40,6 +40,61 @@ if ( isset( $_GET['id'] ) ) {
             <a href="/" class="btn btn-primary btn-sm"
               ><i class=""></i> Buy Now</a
             >
+            <!-- Add to cart -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addtocart-modal-<?= $posts["id"];?>">
+              Add to cart
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="addtocart-modal-<?= $posts["id"];?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Add to Cart</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Are you comfirm add "<?= $posts["title"]; ?>" to your Cart.
+                    <img src="<?= $posts['image_url']; ?>" alt="<?= $posts['title']; ?>.image" style="height: 400px;">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <form method="POST" action="/carts/add">
+                      <input type="hidden" name="id" value="<?= $posts["id"]; ?>" />
+                      <input type="hidden" name="editor_by" value="<?= $posts["user_id"]; ?>" />
+                      <input type="hidden" name="user_id" value= "<?= $_SESSION['user']['id']; ?>"/>
+                      <input type="hidden" name="post_title" value="<?= $posts["title"]?>"/>
+                      <input type="hidden" name="post_content" value="<?= $posts["content"]?>">
+                      <button type="submit" class="btn btn-primary">Add</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Buy now -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#buynow-modal-<?= $posts["id"];?>">
+              Buy Now
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="buynow-modal-<?= $posts["id"];?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Buy Now</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    Are you sure want to buy "<?= $posts["title"]; ?>".
+                    <img src="<?= $posts['image_url']; ?>" alt="<?= $posts['title']; ?>.image" style="height: 400px;">
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Buy</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class=" mx-auto">
@@ -85,7 +140,7 @@ if ( isset( $_GET['id'] ) ) {
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <form method="POST" action="/comments/delete?=<?= $comment["post_id"]; ?>">
+                            <form method="POST" action="/comments/delete">
                               <input type="hidden" name="post_id" value="<?= $comment["post_id"]; ?>" />
                               <input type="hidden" name="user_id" value= "<?= $comment['user_id']; ?>"/>
                               <input type="hidden" name="id" value="<?= $comment['id']; ?>" />

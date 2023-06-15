@@ -23,14 +23,15 @@ if(isset($error)){
     exit;
 }
 
-$sql = "UPDATE posts set title = :title, content = :content, image_url = :image_url, status = :status WHERE id = :id";
+$sql = "UPDATE posts set title = :title, content = :content, image_url = :image_url, modified_by = :modified_by, status = :status WHERE id = :id";
 $query = $database->prepare($sql);
 $query->execute([
     'title' => $title,
     'content' => $content,
     'image_url' => $image_url,
     'status' => $status,
-    'id' => $id
+    'id' => $id,
+    'modified_by' => $_SESSION['user']['id']
 ]);
 
 $_SESSION["success"] = "Post has been edited.";

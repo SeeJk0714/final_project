@@ -43,6 +43,13 @@ switch($path){
     case 'comments/delete':
         require 'includes/comments/delete.php';
         break;  
+    //carts
+    case 'carts/add':
+        require 'includes/carts/add.php';
+        break;
+    case 'carts/delete':
+        require 'includes/carts/delete.php';
+        break;
     //pages
     case 'dashboard':
         require 'pages/dashboard.php';
@@ -86,11 +93,11 @@ switch($path){
         require 'pages/users/manage-users-changepwd.php';
         break;
     //order
-    case 'cart-list':
-        require 'pages/order/cart-list.php';
+    case 'cart-form':
+        require 'pages/order&cart/cart-form.php';
         break;
-    case 'order-list':
-        require 'pages/order/order-list.php';
+    case 'order-form':
+        require 'pages/order&cart/order-form.php';
         break;
     default:
         require 'pages/home.php';

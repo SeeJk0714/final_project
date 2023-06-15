@@ -59,10 +59,10 @@
                 <div class="mb-1">
                   <i class="bi bi-cart4" style="font-size: 3rem;"></i>
                 </div>
-                Cart List
+                Cart Form
               </h5>
               <div class="text-center mt-3">
-                <a href="/cart-list" class="btn btn-primary btn-sm"
+                <a href="/cart-form" class="btn btn-primary btn-sm"
                   >Access</a
                 >
               </div>
@@ -76,10 +76,10 @@
                 <div class="mb-1">
                   <i class="bi bi-clipboard2-check" style="font-size: 3rem;"></i>
                 </div>
-                  Order Lists
+                  Order Form
               </h5>
               <div class="text-center mt-3">
-                <a href="/order-list" class="btn btn-primary btn-sm"
+                <a href="/order-form" class="btn btn-primary btn-sm"
                   >Access</a
                 >
               </div>
