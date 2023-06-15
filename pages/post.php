@@ -34,12 +34,6 @@ if ( isset( $_GET['id'] ) ) {
           <img src="<?= $posts['image_url']; ?>" alt="<?= $posts['title']; ?>.image" style="height: 400px;">
           <p class="fs-1"><?= $posts['content']; ?></p>
           <div class=" mt-3">
-            <a href="/" class="btn btn-primary btn-sm"
-              ><i class=""></i> Add to Cart</a
-            >
-            <a href="/" class="btn btn-primary btn-sm"
-              ><i class=""></i> Buy Now</a
-            >
             <!-- Add to cart -->
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addtocart-modal-<?= $posts["id"];?>">
               Add to cart
@@ -71,17 +65,13 @@ if ( isset( $_GET['id'] ) ) {
                 </div>
               </div>
             </div>
-            <!-- Buy now -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#buynow-modal-<?= $posts["id"];?>">
-              Buy Now
-            </button>
-
-            <!-- Modal -->
-            <div class="modal fade" id="buynow-modal-<?= $posts["id"];?>" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <!-- Buy Now -->
+            <button class="btn btn-primary" data-bs-target="#buy-modal-<?= $posts["id"];?>" data-bs-toggle="modal">Buy Now</button>
+            <div class="modal fade" id="buy-modal-<?= $posts["id"];?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
               <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Buy Now</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Buy Now</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -90,7 +80,29 @@ if ( isset( $_GET['id'] ) ) {
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Buy</button>
+                    <button class="btn btn-primary" data-bs-target="#buynow-modal-<?= $posts["id"];?>" data-bs-toggle="modal">Buy</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal fade" id="buynow-modal-<?= $posts["id"];?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"></h1>
+                  </div>
+                  <div class="modal-body">
+                    Payment Successful! 
+                  </div>
+                  <div class="modal-footer">
+                    <form method="POST" action="/orders/add">
+                      <input type="hidden" name="id" value="<?= $posts["id"]; ?>" />
+                      <input type="hidden" name="editor_by" value="<?= $posts["user_id"]; ?>" />
+                      <input type="hidden" name="user_id" value= "<?= $_SESSION['user']['id']; ?>"/>
+                      <input type="hidden" name="post_title" value="<?= $posts["title"]?>"/>
+                      <input type="hidden" name="post_content" value="<?= $posts["content"]?>">
+                      <button type="submit" class="btn btn-primary">Done</button>
+                    </form>
                   </div>
                 </div>
               </div>

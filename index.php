@@ -50,6 +50,10 @@ switch($path){
     case 'carts/delete':
         require 'includes/carts/delete.php';
         break;
+    //orders
+    case 'orders/add':
+        require 'includes/orders/add.php';
+        break;
     //pages
     case 'dashboard':
         require 'pages/dashboard.php';

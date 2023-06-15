@@ -41,7 +41,7 @@
                   <div class="mb-1">
                     <i class="bi bi-pencil-square" style="font-size: 3rem;"></i>
                   </div>
-                  Manage Posts
+                  Manage Products
                 </h5>
                 <div class="text-center mt-3">
                   <a href="/manage-posts" class="btn btn-primary btn-sm"

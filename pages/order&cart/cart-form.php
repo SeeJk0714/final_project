@@ -56,7 +56,7 @@
 ?>
     <div class="container mx-auto my-5" style="max-width: 1000px;">
       <div class="d-flex justify-content-between align-items-center mb-2">
-        <h1 class="h1">Cart List</h1>
+        <h1 class="h1">Cart Form</h1>
       </div>
       <div class="card mb-2 p-4">
       <?php require "parts/message_success.php"; ?>
@@ -77,7 +77,7 @@
               <th scope="row"><?= $cart['id']; ?></th>
               <td>
                 <?php
-                  $excerpt = str_split($cart['title'],10);
+                  $excerpt = str_split($cart['title'],11);
                   if(strlen($excerpt[0])<11){
                     echo $excerpt[0];
                   }else{
@@ -91,10 +91,10 @@
 
               <td class="text-end">
                 <div class="buttons">
-                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#delete-modal-<?= $cart['id']; ?>">
+                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#order-modal-<?= $cart['id']; ?>">
                     <i class="bi bi-clipboard2-check"></i>
                   </button>
-                  <div class="modal fade" id="delete-modal-<?= $cart['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="order-modal-<?= $cart['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
