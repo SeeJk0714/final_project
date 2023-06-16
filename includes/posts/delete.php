@@ -1,6 +1,6 @@
 <?php
 // make sure the user is logged in
-if ( !isUserLoggedIn() ) {
+if ( !isEditorOrAdmin() ) {
     header("Location: /");
     exit;
 }
@@ -25,7 +25,7 @@ $query->execute([
     'id' => $id
 ]);
 
-$_SESSION["success"] = "post has been deleted.";
+$_SESSION["success"] = "The product has been deleted.";
 
 header("Location: /manage-posts");
 exit;

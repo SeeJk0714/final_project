@@ -6,7 +6,6 @@
         exit;
     }
 
-
     $database = connectToDB();
 
     // get all the POST data
@@ -34,6 +33,8 @@
         'post_id' => $post_id,
         'user_id' => $user_id
     ]);
+
+    $_SESSION["success"] = "The comment uploaded successfully.";
 
     header("Location: /post?id=$post_id" );
     exit;

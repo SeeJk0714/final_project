@@ -1,5 +1,4 @@
 <?php
-  // make sure the user is logged in
   if ( !isUserLoggedIn() ) {
     header("Location: /");
     exit;
@@ -8,7 +7,6 @@
   $database = connectToDB();
   
   if ( isAdmin()){
-    // $sql = "SELECT * FROM posts";
     $sql = "SELECT 
     carts.*, 
     users.name AS user_name,
@@ -34,10 +32,7 @@
     ]);
   }else{
     $sql = "SELECT 
-        carts.id, 
-        carts.title, 
-        carts.price, 
-        carts.create_at,
+        carts.*,
         users.name AS user_name, 
         users.email as user_email
         FROM carts 
@@ -98,17 +93,23 @@
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h1 class="modal-title fs-5 text-start" id="exampleModalLabel">Are you sure you want to delete this product from your cart: <br/> "<?= $cart['title']; ?>"?</h1>
+                          <h1 class="modal-title fs-5 text-start" id="exampleModalLabel">Are you sure you want to buy this product: <br/> "<?= $cart['title']; ?>"?</h1>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-start">
                           You're currently deleting "<?= $cart['title']; ?>".
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <form method="POST" action="/carts/delete">
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                          <form method="POST" action="/carts/order">
                             <input type="hidden" name="id" value= "<?= $cart['id']; ?>"/>
-                            <button type="submit" class="btn btn-danger">Yes, please delete</button>
+                            <input type="hidden" name="editor_by" value="<?= $cart['editor_by']; ?>" />
+                            <input type="hidden" name="post_id" value="<?= $cart["post_id"]; ?>" />
+                            <input type="hidden" name="user_id" value= "<?= $_SESSION['user']['id']; ?>"/>
+                            <input type="hidden" name="cart_title" value="<?= $cart["title"];?>"/>
+                            <input type="hidden" name="cart_price" value="<?= $cart["price"];?>">
+                            <input type="hidden" name="cart_image_url" value="<?= $cart["image_url"];?>">
+                            <button type="submit" class="btn btn-success">BUY</button>
                           </form>
                         </div>
                       </div>

@@ -69,12 +69,12 @@
             </tr>
           </thead>
           <tbody>
-            <?php foreach($orders as $cart): ?>
+            <?php foreach($orders as $order): ?>
             <tr>
-              <th scope="row"><?= $cart['id']; ?></th>
+              <th scope="row"><?= $order['id']; ?></th>
               <td>
                 <?php
-                  $excerpt = str_split($cart['title'],11);
+                  $excerpt = str_split($order['title'],11);
                   if(strlen($excerpt[0])<11){
                     echo $excerpt[0];
                   }else{
@@ -82,52 +82,52 @@
                   }
                 ?> 
               </td>
-              <td><?= $cart['user_name']; ?><br/><?= $cart['user_email']; ?></td>
-              <td><?= $cart["price"]; ?></td>
-              <td><?= $cart["create_at"]; ?></td>
+              <td><?= $order['user_name']; ?><br/><?= $order['user_email']; ?></td>
+              <td><?= $order["price"]; ?></td>
+              <td><?= $order["create_at"]; ?></td>
 
               <td class="text-end">
                 <div class="buttons">
-                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#order-modal-<?= $cart['id']; ?>">
-                    <i class="bi bi-clipboard2-check"></i>
+                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#order-modal-<?= $order['id']; ?>">
+                    <i class="bi bi-eye"></i>
                   </button>
-                  <div class="modal fade" id="order-modal-<?= $cart['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="order-modal-<?= $order['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h1 class="modal-title fs-5 text-start" id="exampleModalLabel">Are you sure you want to delete this order from your cart: <br/> "<?= $cart['title']; ?>"?</h1>
+                          <h1 class="modal-title fs-5 text-start" id="exampleModalLabel">Are you sure you want to delete this order from your cart: <br/> "<?= $order['title']; ?>"?</h1>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-start">
-                          You're currently deleting "<?= $cart['title']; ?>".
+                          You're currently deleting "<?= $order['title']; ?>".
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                           <form method="POST" action="/carts/delete">
-                            <input type="hidden" name="id" value= "<?= $cart['id']; ?>"/>
+                            <input type="hidden" name="id" value= "<?= $order['id']; ?>"/>
                             <button type="submit" class="btn btn-danger">Yes, please delete</button>
                           </form>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete-modal-<?= $cart['id']; ?>">
+                  <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete-modal-<?= $order['id']; ?>">
                     <i class="bi bi-trash"></i>
                   </button>
-                  <div class="modal fade" id="delete-modal-<?= $cart['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="delete-modal-<?= $order['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h1 class="modal-title fs-5 text-start" id="exampleModalLabel">Are you sure you want to delete this product from your cart: <br/> "<?= $cart['title']; ?>"?</h1>
+                          <h1 class="modal-title fs-5 text-start" id="exampleModalLabel">Are you sure you want to delete this product from your cart: <br/> "<?= $order['title']; ?>"?</h1>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-start">
-                          You're currently deleting "<?= $cart['title']; ?>".
+                          You're currently deleting "<?= $order['title']; ?>".
                         </div>
                         <div class="modal-footer">
                           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <form method="POST" action="/carts/delete">
-                            <input type="hidden" name="id" value= "<?= $cart['id']; ?>"/>
+                          <form method="POST" action="/orders/delete">
+                            <input type="hidden" name="id" value= "<?= $order['id']; ?>"/>
                             <button type="submit" class="btn btn-danger">Yes, please delete</button>
                           </form>
                         </div>

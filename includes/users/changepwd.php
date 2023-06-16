@@ -1,5 +1,9 @@
 <?php
-
+    if ( !isUserLoggedIn() ) {
+        header("Location: /");
+        exit;
+    }
+    
     $database = connectToDB();
 
     $password = $_POST['password'];

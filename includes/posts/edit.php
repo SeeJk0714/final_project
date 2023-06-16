@@ -1,6 +1,6 @@
 <?php
 // make sure the user is logged in
-if ( !isUserLoggedIn() ) {
+if ( !isEditorOrAdmin() ) {
     header("Location: /");
     exit;
 }
@@ -34,7 +34,7 @@ $query->execute([
     'modified_by' => $_SESSION['user']['id']
 ]);
 
-$_SESSION["success"] = "Post has been edited.";
+$_SESSION["success"] = "The product has been edited.";
 
 header("Location: /manage-posts");
 exit;

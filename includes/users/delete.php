@@ -1,4 +1,9 @@
 <?php
+    if ( !isUserLoggedIn() ) {
+        header("Location: /");
+        exit;
+    }
+    
     $database = connectToDB();
 
     $id = $_POST["id"];
@@ -19,7 +24,7 @@
         'id' => $id
     ]);
 
-    $_SESSION["success"] = "user has been deleted.";
+    $_SESSION["success"] = "The user has been deleted.";
 
     header("Location: /manage-users");
     exit;

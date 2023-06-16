@@ -1,6 +1,6 @@
 <?php
      // make sure the user is logged in
-     if ( !isUserLoggedIn() ) {
+     if ( !isEditorOrAdmin()) {
         header("Location: /");
         exit;
     }
@@ -30,7 +30,7 @@
         'user_id' => $_SESSION['user']['id']
     ]);
 
-    $_SESSION["success"] = "New post has been created.";
+    $_SESSION["success"] = "New product has been created.";
     header("Location: /manage-posts");
     exit;
     
