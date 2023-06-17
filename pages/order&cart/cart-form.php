@@ -104,7 +104,7 @@
                           <form method="POST" action="/carts/order">
                             <input type="hidden" name="id" value= "<?= $cart['id']; ?>"/>
                             <input type="hidden" name="editor_by" value="<?= $cart['editor_by']; ?>" />
-                            <input type="hidden" name="post_id" value="<?= $cart["post_id"]; ?>" />
+                            <input type="hidden" name="product_id" value="<?= $cart["product_id"]; ?>" />
                             <input type="hidden" name="user_id" value= "<?= $_SESSION['user']['id']; ?>"/>
                             <input type="hidden" name="cart_title" value="<?= $cart["title"];?>"/>
                             <input type="hidden" name="cart_price" value="<?= $cart["price"];?>">

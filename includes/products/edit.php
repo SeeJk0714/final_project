@@ -19,11 +19,11 @@ if(empty($title) || empty($price) || empty($image_url) || empty($status) || empt
 
 if(isset($error)){
     $_SESSION['error'] = $error;
-    header("Location: /manage-posts-edit?id=$id");
+    header("Location: /manage-products-edit?id=$id");
     exit;
 }
 
-$sql = "UPDATE posts set title = :title, price = :price, image_url = :image_url, modified_by = :modified_by, status = :status WHERE id = :id";
+$sql = "UPDATE products set title = :title, price = :price, image_url = :image_url, modified_by = :modified_by, status = :status WHERE id = :id";
 $query = $database->prepare($sql);
 $query->execute([
     'title' => $title,
@@ -36,5 +36,5 @@ $query->execute([
 
 $_SESSION["success"] = "The product has been edited.";
 
-header("Location: /manage-posts");
+header("Location: /manage-products");
 exit;

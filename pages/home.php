@@ -2,10 +2,10 @@
 
   $database = connectToDB();
 
-  $sql = "SELECT * FROM posts where status = 'publish' ORDER BY id DESC";
+  $sql = "SELECT * FROM products where status = 'publish' ORDER BY id DESC";
   $query = $database->prepare($sql);
   $query->execute();
-  $posts = $query->fetchAll();
+  $products = $query->fetchAll();
 
   require "parts/header.php";
 ?>
@@ -23,23 +23,23 @@
   </nav>
   <div class="container mx-auto mb-5" style="max-width: 900px;">
     <div class="row row-cols-1 row-cols-md-3 g-4">
-    <?php foreach ($posts as $post):?>
+    <?php foreach ($products as $product):?>
       <div class="col">
         <div class="card h-100">
           <img
-            src="<?= $post['image_url']; ?>"
+            src="<?= $product['image_url']; ?>"
             class="card-img-top"
-            alt="Product <?= $post['id']; ?>"
+            alt="Product <?= $product['id']; ?>"
             style="height: 250px;"
           />
           <div class="container">
-            <h5 class="card-title"><?= $post['title']; ?></h5>
+            <h5 class="card-title"><?= $product['title']; ?></h5>
             <p class="card-text">
-              RM<?= $post["price"]; ?>
+              RM<?= $product["price"]; ?>
             </p>
           </div>
           <div class="text-end">
-            <a href="/post?id=<?= $post['id']; ?>" class="btn btn-sm">Read More</a>
+            <a href="/product?id=<?= $product['id']; ?>" class="btn btn-sm">Read More</a>
           </div>
         </div>
       </div>

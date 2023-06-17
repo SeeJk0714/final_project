@@ -8,7 +8,7 @@
   $database = connectToDB();
   
   if ( isAdmin()){
-    // $sql = "SELECT * FROM posts";
+    // $sql = "SELECT * FROM products";
     $sql = "SELECT 
     orders.*, 
     users.name AS user_name,
@@ -109,7 +109,7 @@
                             </div>
                           </div>
                           <hr/>
-                          Price: <?= $order['price'];?>
+                          Price: RM<?= $order['price'];?>
                           <hr/>
                           Date: <?= $order['create_at'];?>
                         </div>

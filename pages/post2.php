@@ -5,18 +5,18 @@
 
         $database = connectToDB();
 
-        // make sure the post is published
-        $sql = "SELECT * FROM posts WHERE id = :id AND status = 'publish'";
+        // make sure the product is published
+        $sql = "SELECT * FROM products WHERE id = :id AND status = 'publish'";
         $query = $database->prepare( $sql );
         $query->execute([
             'id' => $_GET['id']
         ]);
 
         // fetch
-        $post = $query->fetch();
+        $product = $query->fetch();
 
-        if ( !$post ) {
-            // if post don't exists, then we redirect back to home
+        if ( !$product ) {
+            // if product don't exists, then we redirect back to home
             header("Location: /");
             exit;
         }
@@ -30,11 +30,11 @@
     require "parts/header.php";
 ?>
     <div class="container mx-auto my-5" style="max-width: 500px;">
-        <h1 class="h1 mb-4 text-center"><?= $post['title']; ?></h1>
+        <h1 class="h1 mb-4 text-center"><?= $product['title']; ?></h1>
         <?php  
-            echo nl2br( $post["price"] );
+            echo nl2br( $product["price"] );
             // // turn this content to an array
-            // $paragraphs_array = preg_split( '/\n\s*\n/', $post["price"] );
+            // $paragraphs_array = preg_split( '/\n\s*\n/', $product["price"] );
             
             // // once we have the array, we'll use foreach to print out each line using <p>
             // foreach( $paragraphs_array as $paragraph ) {
@@ -59,10 +59,10 @@
                     FROM comments
                     JOIN users
                     ON comments.user_id = users.id
-                    WHERE post_id = :post_id ORDER BY id DESC";
+                    WHERE product_id = :product_id ORDER BY id DESC";
                 $query = $database->prepare($sql);
                 $query->execute([
-                    "post_id" => $post["id"]
+                    "product_id" => $product["id"]
                 ]);
 
                 $comments = $query->fetchAll();
@@ -102,7 +102,7 @@
                     <label for="comments" class="form-label">Enter your comment below:</label>
                     <textarea class="form-control" id="comments" rows="3" name="comments"></textarea>
                 </div>
-                <input type="hidden" name="post_id" value="<?= $post['id']; ?>" />
+                <input type="hidden" name="product_id" value="<?= $product['id']; ?>" />
                 <input type="hidden" name="user_id" value="<?= $_SESSION['user']['id']; ?>" />
                 <button type="submit" class="btn btn-primary mt-2">Submit</button>
             </form>

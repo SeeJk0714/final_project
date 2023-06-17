@@ -10,31 +10,31 @@
 
     // get all the POST data
     $comments = $_POST['comments'];
-    $post_id = $_POST['post_id'];
+    $product_id = $_POST['product_id'];
     $user_id = $_POST['user_id'];
 
     // do error checking
-    if ( empty( $comments ) || empty( $post_id ) || empty( $user_id ) ) {
+    if ( empty( $comments ) || empty( $product_id ) || empty( $user_id ) ) {
         $error = "Please fill out the comment";
     }
     
     if( isset ($error)){
         $_SESSION['error'] = $error;
-        header("Location: /post?id=$post_id" ); 
+        header("Location: /product?id=$product_id" ); 
         exit;
     }
 
     // insert the comment into database
-    $sql = "INSERT INTO comments (`comment`, `post_id`, `user_id`)
-    VALUES(:comment, :post_id, :user_id)";
+    $sql = "INSERT INTO comments (`comment`, `product_id`, `user_id`)
+    VALUES(:comment, :product_id, :user_id)";
     $query = $database->prepare( $sql );
     $query->execute([
         'comment' => $comments,
-        'post_id' => $post_id,
+        'product_id' => $product_id,
         'user_id' => $user_id
     ]);
 
     $_SESSION["success"] = "The comment uploaded successfully.";
 
-    header("Location: /post?id=$post_id" );
+    header("Location: /product?id=$product_id" );
     exit;

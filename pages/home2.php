@@ -4,18 +4,18 @@
   // $database = connectToDB();
 
   // ASC - acens
-  // $sql = "SELECT * FROM posts where status = 'publish' ORDER BY id DESC";
+  // $sql = "SELECT * FROM products where status = 'publish' ORDER BY id DESC";
   // $query = $database->prepare($sql);
   // $query->execute();
 
   // fetch the data from query
-  // $posts = $query->fetchAll();
+  // $products = $query->fetchAll();
 
   $keyword = isset( $_GET["keyword"] ) ? $_GET["keyword"] : "";
 
   $database = new DB();
-  $posts = $database->fetchAll(
-    "SELECT * FROM posts 
+  $products = $database->fetchAll(
+    "SELECT * FROM products 
     WHERE status = 'publish' AND content like '%$keyword%'
     ORDER BY id DESC"
   );
@@ -24,16 +24,16 @@
 ?>
     <div class="container mx-auto my-5" style="max-width: 500px;">
       <h1 class="h1 mb-4 text-center">My Blog</h1>
-      <?php foreach ($posts as $post) : ?>
+      <?php foreach ($products as $product) : ?>
       <div class="card mb-2">
         <div class="card-body">
-          <h5 class="card-title"><?= $post['title']; ?></h5>
+          <h5 class="card-title"><?= $product['title']; ?></h5>
           <p class="card-text"><?php 
-            $excerpt = str_split( $post["price"], 100 );
+            $excerpt = str_split( $product["price"], 100 );
             echo "RM".$excerpt[0] . "... read more"; 
           ?></p>
           <div class="text-end">
-            <a href="/post?id=<?= $post['id']; ?>" class="btn btn-primary btn-sm">Read More</a>
+            <a href="/product?id=<?= $product['id']; ?>" class="btn btn-primary btn-sm">Read More</a>
           </div>
         </div>
       </div>

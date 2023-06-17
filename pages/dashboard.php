@@ -44,7 +44,7 @@
                   Manage Products
                 </h5>
                 <div class="text-center mt-3">
-                  <a href="/manage-posts" class="btn btn-primary btn-sm"
+                  <a href="/manage-products" class="btn btn-primary btn-sm"
                     >Access</a
                   >
                 </div>

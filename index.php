@@ -27,15 +27,15 @@ switch($path){
     case 'users/changepwd':
         require 'includes/users/changepwd.php';
         break;
-    //posts
-    case 'posts/add':
-        require 'includes/posts/add.php';
+    //products
+    case 'products/add':
+        require 'includes/products/add.php';
         break;
-    case 'posts/edit':
-        require 'includes/posts/edit.php';
+    case 'products/edit':
+        require 'includes/products/edit.php';
         break;
-    case 'posts/delete':
-        require 'includes/posts/delete.php';
+    case 'products/delete':
+        require 'includes/products/delete.php';
         break;
     case 'comments/add':
         require 'includes/comments/add.php';
@@ -73,21 +73,21 @@ switch($path){
     case 'logout':
         require 'pages/logout.php';
         break;
-    case 'post':
-        require 'pages/post.php';
+    case 'product':
+        require 'pages/product.php';
         break;
-    //post
-    case 'manage-posts':
-        require 'pages/posts/manage-posts.php';
+    //product
+    case 'manage-products':
+        require 'pages/products/manage-products.php';
         break;
-    case 'manage-posts-add':
-        require 'pages/posts/manage-posts-add.php';
+    case 'manage-products-add':
+        require 'pages/products/manage-products-add.php';
         break;
-    case 'manage-posts-edit':
-        require 'pages/posts/manage-posts-edit.php';
+    case 'manage-products-edit':
+        require 'pages/products/manage-products-edit.php';
         break;
     case 'add-comment':
-        require 'pages/posts/add-comment.php';
+        require 'pages/products/add-comment.php';
         break;
     //user
     case 'manage-users':

@@ -17,10 +17,10 @@
 
     if( isset ($error)){
         $_SESSION['error'] = $error;
-        header("Location: /manage-posts-add");    
+        header("Location: /manage-products-add");    
         exit;
     }
-    $sql = "INSERT INTO posts (`title`, `price`,`image_url`, `user_id`)
+    $sql = "INSERT INTO products (`title`, `price`,`image_url`, `user_id`)
     VALUES(:title, :price, :image_url, :user_id)";
     $query = $database->prepare( $sql );
     $query->execute([
@@ -31,6 +31,6 @@
     ]);
 
     $_SESSION["success"] = "New product has been created.";
-    header("Location: /manage-posts");
+    header("Location: /manage-products");
     exit;
     
