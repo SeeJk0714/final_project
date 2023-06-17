@@ -83,30 +83,38 @@
                 ?> 
               </td>
               <td><?= $order['user_name']; ?><br/><?= $order['user_email']; ?></td>
-              <td><?= $order["price"]; ?></td>
+              <td>RM<?= $order["price"]; ?></td>
               <td><?= $order["create_at"]; ?></td>
 
               <td class="text-end">
                 <div class="buttons">
-                <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#order-modal-<?= $order['id']; ?>">
+                <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#order-modal-<?= $order['id']; ?>">
                     <i class="bi bi-eye"></i>
                   </button>
-                  <div class="modal fade" id="order-modal-<?= $order['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal fade" id="order-modal-<?= $order['id']; ?>" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h1 class="modal-title fs-5 text-start" id="exampleModalLabel">Are you sure you want to delete this order from your cart: <br/> "<?= $order['title']; ?>"?</h1>
+                          <h1 class="modal-title fs-5 text-start" id="exampleModalLabel">Order History:</h1>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-start">
-                          You're currently deleting "<?= $order['title']; ?>".
+                          <div class="container-fluid">
+                            Product: 
+                            <br/>
+                            <div class="row">
+                              
+                              <div class="col-8"><?=$order['title']?></div>
+                              <div class="col-4 ms-auto"><img src="<?= $order['image_url']; ?>" alt="<?= $order['title']; ?>.image" style="width: 100px;"></div>
+                            </div>
+                          </div>
+                          <hr/>
+                          Price: <?= $order['price'];?>
+                          <hr/>
+                          Date: <?= $order['create_at'];?>
                         </div>
                         <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <form method="POST" action="/carts/delete">
-                            <input type="hidden" name="id" value= "<?= $order['id']; ?>"/>
-                            <button type="submit" class="btn btn-danger">Yes, please delete</button>
-                          </form>
+                          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                         </div>
                       </div>
                     </div>

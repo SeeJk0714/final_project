@@ -21,7 +21,7 @@ if(empty($email) || empty($password)){
         if ( password_verify( $password, $user["password"] ) ) {
             $_SESSION["user"] = $user;
 
-            header("Location: /dashboard");
+            header("Location: /");
             exit;
         } else {
             $error = "The password provided is not match";

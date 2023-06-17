@@ -81,7 +81,7 @@
                 ?> 
               </td>
               <td><?= $cart['user_name']; ?><br/><?= $cart['user_email']; ?></td>
-              <td><?= $cart["price"]; ?></td>
+              <td>RM<?= $cart["price"]; ?></td>
               <td><?= $cart["create_at"]; ?></td>
 
               <td class="text-end">

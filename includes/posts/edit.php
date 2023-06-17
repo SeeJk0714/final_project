@@ -8,12 +8,12 @@ if ( !isEditorOrAdmin() ) {
 $database = connectToDB();
 
 $title = $_POST["title"];
-$content = $_POST["content"];
+$price = $_POST["price"];
 $image_url = $_POST["image_url"];
 $status = $_POST["status"];
 $id =$_POST["id"];
 
-if(empty($title) || empty($content) || empty($image_url) || empty($status) || empty($id)){
+if(empty($title) || empty($price) || empty($image_url) || empty($status) || empty($id)){
     $error = "All fields is requrired";
 }
 
@@ -23,11 +23,11 @@ if(isset($error)){
     exit;
 }
 
-$sql = "UPDATE posts set title = :title, content = :content, image_url = :image_url, modified_by = :modified_by, status = :status WHERE id = :id";
+$sql = "UPDATE posts set title = :title, price = :price, image_url = :image_url, modified_by = :modified_by, status = :status WHERE id = :id";
 $query = $database->prepare($sql);
 $query->execute([
     'title' => $title,
-    'content' => $content,
+    'price' => $price,
     'image_url' => $image_url,
     'status' => $status,
     'id' => $id,

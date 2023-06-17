@@ -32,9 +32,9 @@
     <div class="container mx-auto my-5" style="max-width: 500px;">
         <h1 class="h1 mb-4 text-center"><?= $post['title']; ?></h1>
         <?php  
-            echo nl2br( $post['content'] );
+            echo nl2br( $post["price"] );
             // // turn this content to an array
-            // $paragraphs_array = preg_split( '/\n\s*\n/', $post["content"] );
+            // $paragraphs_array = preg_split( '/\n\s*\n/', $post["price"] );
             
             // // once we have the array, we'll use foreach to print out each line using <p>
             // foreach( $paragraphs_array as $paragraph ) {

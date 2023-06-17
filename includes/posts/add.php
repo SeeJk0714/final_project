@@ -8,10 +8,10 @@
     $database = connectToDB();
 
     $title = $_POST["title"];
-    $content = $_POST["content"];
+    $price = $_POST["price"];
     $image_url = $_POST["image_url"];
     
-    if(empty($title) || empty($content) || empty($image_url)){
+    if(empty($title) || empty($price) || empty($image_url)){
         $error = "All fields are required";
     }
 
@@ -20,12 +20,12 @@
         header("Location: /manage-posts-add");    
         exit;
     }
-    $sql = "INSERT INTO posts (`title`, `content`,`image_url`, `user_id`)
-    VALUES(:title, :content, :image_url, :user_id)";
+    $sql = "INSERT INTO posts (`title`, `price`,`image_url`, `user_id`)
+    VALUES(:title, :price, :image_url, :user_id)";
     $query = $database->prepare( $sql );
     $query->execute([
         'title' => $title,
-        'content' => $content,
+        'price' => $price,
         'image_url' => $image_url,
         'user_id' => $_SESSION['user']['id']
     ]);

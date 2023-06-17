@@ -23,8 +23,8 @@ if ( isset( $_GET['id'] ) ) {
   require "parts/header.php";
 ?>
     <div class=" mt-3">
-      <a href="/" class="btn btn-primary btn-sm"
-        ><i class="bi bi-arrow-left"></i> Back</a
+      <a href="/" class="btn fs-1 "
+        ><i class="bi bi-arrow-left-circle"></i></a
       >
     </div>
     <div class="container mx-auto my-5" >
@@ -32,7 +32,7 @@ if ( isset( $_GET['id'] ) ) {
       <div class='d-flex'>
         <div>
           <img src="<?= $posts['image_url']; ?>" alt="<?= $posts['title']; ?>.image" style="height: 400px;">
-          <p class="fs-1"><?= $posts['content']; ?></p>
+          <p class="fs-1">RM<?= $posts["price"]; ?></p>
           <?php if ( isUserLoggedIn()) :?>
             <div class=" mt-3">
               <!-- Add to cart -->
@@ -59,7 +59,7 @@ if ( isset( $_GET['id'] ) ) {
                         <input type="hidden" name="editor_by" value="<?= $posts["user_id"]; ?>" />
                         <input type="hidden" name="user_id" value= "<?= $_SESSION['user']['id']; ?>"/>
                         <input type="hidden" name="post_title" value="<?= $posts["title"];?>"/>
-                        <input type="hidden" name="post_content" value="<?= $posts["content"];?>">
+                        <input type="hidden" name="post_content" value="<?= $posts["price"];?>">
                         <input type="hidden" name="post_image_url" value="<?= $posts['image_url']; ?>">
                         <button type="submit" class="btn btn-primary">Add</button>
                       </form>
@@ -69,7 +69,7 @@ if ( isset( $_GET['id'] ) ) {
               </div>
               <!-- Buy Now -->
               <button class="btn btn-primary" data-bs-target="#buy-modal-<?= $posts["id"];?>" data-bs-toggle="modal">Buy Now</button>
-              <div class="modal fade" id="buy-modal-<?= $posts["id"];?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+              <div class="modal fade" id="buy-modal-<?= $posts["id"];?>" aria-hidden="true" data-bs-backdrop="static" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -87,12 +87,9 @@ if ( isset( $_GET['id'] ) ) {
                   </div>
                 </div>
               </div>
-              <div class="modal fade" id="buynow-modal-<?= $posts["id"];?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+              <div class="modal fade" id="buynow-modal-<?= $posts["id"];?>" aria-hidden="true" data-bs-backdrop="static" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalToggleLabel2"></h1>
-                    </div>
                     <div class="modal-body">
                       Payment Successful! 
                     </div>
@@ -102,7 +99,7 @@ if ( isset( $_GET['id'] ) ) {
                         <input type="hidden" name="editor_by" value="<?= $posts["user_id"]; ?>" />
                         <input type="hidden" name="user_id" value= "<?= $_SESSION['user']['id']; ?>"/>
                         <input type="hidden" name="post_title" value="<?= $posts["title"];?>"/>
-                        <input type="hidden" name="post_content" value="<?= $posts["content"];?>">
+                        <input type="hidden" name="post_content" value="<?= $posts["price"];?>">
                         <input type="hidden" name="post_image_url" value="<?= $posts['image_url']; ?>">
                         <button type="submit" class="btn btn-primary">Done</button>
                       </form>
@@ -155,7 +152,7 @@ if ( isset( $_GET['id'] ) ) {
                             You're currently deleting "<?= $comment['name']; ?>"
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
                             <form method="POST" action="/comments/delete">
                               <input type="hidden" name="post_id" value="<?= $comment["post_id"]; ?>" />
                               <input type="hidden" name="user_id" value= "<?= $comment['user_id']; ?>"/>

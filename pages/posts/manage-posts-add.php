@@ -14,12 +14,13 @@
             <input type="text" class="form-control" id="post-title" name="title"/>
           </div>
           <div class="mb-3">
-            <label for="post-content" class="form-label">Content</label>
+            <label for="post-price" class="form-label">Price</label>
+            RM
             <textarea
               class="form-control"
-              id="post-content"
+              id="post-price"
               rows="10"
-              name="content"
+              name="price"
             ></textarea>
           </div>
           <div class="mb-3">
