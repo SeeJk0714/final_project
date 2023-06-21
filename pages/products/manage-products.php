@@ -25,7 +25,7 @@
         products.title, 
         products.status, 
         users.name AS user_name, 
-        users.email as user_email
+        users.email AS user_email
         FROM products 
         JOIN users 
         ON products.user_id = users.id 
@@ -87,7 +87,6 @@
                 <div class="buttons">
                   <a
                     href="/product?id=<?= $product['id']; ?>"
-                    target="_blank"
                     class="btn btn-primary btn-sm me-2 
                     <?php 
                       if($product['status'] == "pending"){

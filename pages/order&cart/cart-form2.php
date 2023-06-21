@@ -1,127 +1,30 @@
 <?php
-  if ( !isUserLoggedIn() ) {
-    header("Location: /");
-    exit;
-  }
-  
-  $database = connectToDB();
-  
-  if ( isAdmin()){
-    $sql = "SELECT 
-    carts.*, 
-    users.name AS user_name,
-    users.email AS user_email,
-    products.title,
-    products.price
-    FROM carts 
-    JOIN users 
-    ON carts.user_id = users.id
-    JOIN products
-    ON carts.product_id = products.id";
-    $query = $database->prepare($sql);
-    $query->execute();
 
-  }else if( isEditor() ){   
-    $sql = "SELECT 
-    carts.*, 
-    users.name AS user_name,
-    users.email AS user_email,
-    products.title,
-    products.price
-    FROM carts 
-    JOIN users 
-    ON carts.user_id = users.id
-    JOIN products
-    ON carts.product_id = products.id
-    WHERE carts.editor_by = :user_id";
-    $query = $database->prepare($sql);
-    $query->execute([
-      'user_id' => $_SESSION["user"]["id"]
-    ]);
-  }else{
+    // call db class
+    $database = connectToDB();
+
+    // get the cart from the database based on the current logged in user
     $sql = "SELECT
-    carts.*,
+    cart.*,
     products.title,
     products.price
-    FROM carts
+    FROM cart
     JOIN products
-    ON carts.product_id = products.id
-    WHERE carts.user_id = :user_id AND order_id IS NULL";
+    ON cart.product_id = products.id
+    WHERE cart.user_id = :user_id AND order_id IS NULL";
     $query = $database->prepare($sql);
     $query->execute([
         'user_id' => $_SESSION['user']['id']
     ]);
-  }
 
-  $products_in_cart = $query->fetchAll();
+    $products_in_cart = $query->fetchAll();
 
-  $total_in_cart = 0;
+    $total_in_cart = 0;
 
-  require "parts/header.php";
+    require 'parts/header.php';
 ?>
-    <?php if(isEditorOrAdmin()) :?>
-      <div class="container mx-auto my-5" style="max-width: 1000px;">
-        <div class="d-flex justify-content-between align-items-center mb-2">
-          <h1 class="h1">Cart Form</h1>
-        </div>
-        <div class="card mb-2 p-4">
-        <?php require "parts/message_success.php"; ?>
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col" style="width: 20%;">Title</th>
-                <th scope="col">Amount</th>
-                <th scope="col">Consumer</th>
-                <th scope="col">Price</th>
-                <th scope="col">Time</th>
-                <th scope="col" class="text-end">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <?php foreach($products_in_cart as $cart): ?>
-              <tr>
-                <?php if($cart['order_id'] === NULL) :?>
-                <th scope="row"><?= $cart['id']; ?></th>
-                <td>
-                  <?php
-                    $excerpt = str_split($cart['title'],11);
-                    if(strlen($excerpt[0])<11){
-                      echo $excerpt[0];
-                    }else{
-                      echo $excerpt[0]."...";
-                    }
-                  ?> 
-                </td>
-                <td><?= $cart["quantity"]; ?></td>
-                <td><?= $cart['user_name']; ?><br/><?= $cart['user_email']; ?></td>
-                <td>RM<?= $cart["price"] * $cart["quantity"] ;?></td>
-                <td><?= $cart["create_at"]; ?></td>
-                <td>
-                  <form
-                      method="POST"
-                      action="/carts/delete"
-                      >
-                      <input 
-                          type="hidden"
-                          name="cart_id"
-                          value="<?= $cart['id']; ?>"
-                          />
-                      <button type="submit" class="btn btn-danger btn-sm">
-                          <i class="bi bi-trash"></i>
-                      </button>
-                  </form>
-                </td>
-                <?php endif ;?>
-              </tr>
-            <?php endforeach; ?>
-            </tbody>
-          </table>
-        </div>
-        
-      </div>
-    <?php else :?>
-      <div class="container mt-5 mb-2 mx-auto" style="max-width: 900px;">
+
+        <div class="container mt-5 mb-2 mx-auto" style="max-width: 900px;">
             
             <div class="min-vh-100">
 
@@ -161,7 +64,7 @@
                                 <td>
                                     <form
                                         method="POST"
-                                        action="/carts/delete"
+                                        action="/products/remove_from_cart"
                                         >
                                         <input 
                                             type="hidden"
@@ -199,12 +102,7 @@
                 </div>    
             </div>
         </div>
-    <?php endif ;?>
-      <div class="text-center">
-        <a href="/dashboard" class="btn btn-link btn-sm"
-          ><i class="bi bi-arrow-left"></i> Back to Dashboard</a
-        >
-      </div>
-
+        
 <?php
-  require "parts/footer.php";
+
+    require "parts/footer.php";

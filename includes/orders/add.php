@@ -7,17 +7,15 @@ if ( !isUserLoggedIn() ) {
 $database = connectToDB();
 
 // get all the POST data
-$id = $_POST['id'];
-$user_id = $_POST['user_id'];
-$product_title = $_POST['product_title'];
-$product_price = $_POST['product_price'];
+$product_id = $_POST['product_id'];
 $editor_by = $_POST['editor_by'];
-$product_image_url =$_POST['product_image_url'];
-
+$price = $_POST['price'];
+$amount =$_POST['amount'];
+$total = 0;
 
 // do error checking
-if ( empty( $id ) || empty( $editor_by ) || empty($user_id ) || empty($product_title) || empty($product_price) || empty($product_image_url)) {
-    $error = "Please fill out the comment";
+if ( empty( $product_id ) || empty( $amount )) {
+    $error = "ERROR";
 }
 
 if( isset ($error)){
@@ -26,18 +24,43 @@ if( isset ($error)){
     exit;
 }
 
-// insert the comment into database
-$sql = "INSERT INTO orders (`title`, `price`, `product_id`, `user_id`, `editor_by`,`image_url`)
-VALUES(:title, :price, :product_id, :user_id, :editor_by, :image_url)";
+$sql = "INSERT INTO carts (`product_id`,`quantity`,`editor_by`,`user_id`) VALUES (:product_id, :quantity, :editor_by, :user_id)";
 $query = $database->prepare( $sql );
 $query->execute([
-    'title' => $product_title,
-    'price' => $product_price,
-    'product_id' => $id,
-    'user_id' => $user_id,
+    'product_id' => $product_id,
+    'quantity' => $amount,
     'editor_by' => $editor_by,
-    'image_url' => $product_image_url
+    'user_id' => $_SESSION['user']['id']
 ]);
+
+$total = $price * $amount;
+
+$sql = "INSERT INTO orders (`user_id`, `total_amount`)
+VALUES(:user_id, :total_amount)";
+$query = $database->prepare( $sql );
+$query->execute([
+    'user_id' => $_SESSION['user']['id'],
+    'total_amount' => $total
+
+]);
+
+$order_id = $database->lastInsertId();
+
+$sql = "SELECT * FROM carts WHERE user_id = :user_id AND order_id IS NULL";
+$query = $database->prepare($sql);
+$query->execute([
+    'user_id' => $_SESSION['user']['id']
+]);
+$products_in_cart = $query->fetchAll();
+
+foreach( $products_in_cart as $cart ) {
+$sql = "UPDATE carts SET order_id = :order_id WHERE id = :id";
+$query = $database->prepare($sql);
+$query->execute([
+    'order_id' => $order_id,
+    'id' => $cart['id']
+]);
+}
 
 $_SESSION["success"] = "The product has been added to the order.";
 header("Location: /order-form" );

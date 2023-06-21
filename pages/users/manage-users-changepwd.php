@@ -1,10 +1,10 @@
 <?php
    // check if the current user is an admin or not
-  if(!isEditorOrAdmin()){
-    // if current user is not an admin, redirect to dashboard
-      header("Location: /dashboard");
-      exit;
-    }
+  // if(!isEditorOrAdmin()){
+  //   // if current user is not an admin, redirect to dashboard
+  //     header("Location: /dashboard");
+  //     exit;
+  //   }
 
   if ( isset( $_GET['id'] ) ) {
     $database = connectToDB();

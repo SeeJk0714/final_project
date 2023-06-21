@@ -48,22 +48,21 @@ if ( isset( $_GET['id'] ) ) {
                       <h1 class="modal-title fs-5" id="staticBackdropLabel">Add to Cart</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                      Are you comfirm add "<?= $products["title"]; ?>" to your Cart.
-                      <img src="<?= $products['image_url']; ?>" alt="<?= $products['title']; ?>.image" style="height: 400px;">
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                      <form method="POST" action="/carts/add">
-                        <input type="hidden" name="id" value="<?= $products["id"]; ?>" />
+                    <form method="POST" action="/carts/add">
+                      <div class="modal-body">
+                        Are you comfirm add "<?= $products["title"]; ?>" to your Cart.
+                        <img src="<?= $products['image_url']; ?>" alt="<?= $products['title']; ?>.image" style="height: 400px;"><br/>
+                        <label for="amount">Amount(limit 10) :</label>
+                        <input type="number" id="amount" name="amount" style="width: 50px;" min="0" max="10">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <!-- <form method="POST" action="/carts/add"> -->
+                        <input type="hidden" name="product_id" value="<?= $products["id"]; ?>" />
                         <input type="hidden" name="editor_by" value="<?= $products["user_id"]; ?>" />
-                        <input type="hidden" name="user_id" value= "<?= $_SESSION['user']['id']; ?>"/>
-                        <input type="hidden" name="product_title" value="<?= $products["title"];?>"/>
-                        <input type="hidden" name="product_price" value="<?= $products["price"];?>">
-                        <input type="hidden" name="product_image_url" value="<?= $products['image_url']; ?>">
                         <button type="submit" class="btn btn-primary">Add</button>
-                      </form>
-                    </div>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -76,34 +75,21 @@ if ( isset( $_GET['id'] ) ) {
                       <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Buy Now</h1>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
-                      Are you sure want to buy "<?= $products["title"]; ?>".
-                      <img src="<?= $products['image_url']; ?>" alt="<?= $products['title']; ?>.image" style="height: 400px;">
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                      <button class="btn btn-primary" data-bs-target="#buynow-modal-<?= $products["id"];?>" data-bs-toggle="modal">Buy</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="modal fade" id="buynow-modal-<?= $products["id"];?>" aria-hidden="true" data-bs-backdrop="static" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-body">
-                      Payment Successful! 
-                    </div>
-                    <div class="modal-footer">
-                      <form method="POST" action="/orders/add">
-                        <input type="hidden" name="id" value="<?= $products["id"]; ?>" />
+                    <form method="POST" action="/orders/add">
+                      <div class="modal-body">
+                        Are you sure want to buy "<?= $products["title"]; ?>".
+                        <img src="<?= $products['image_url']; ?>" alt="<?= $products['title']; ?>.image" style="height: 400px;">
+                        <label for="amount">Amount(limit 10) :</label>
+                        <input type="number" id="amount" name="amount" style="width: 50px;" min="0" max="10">
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                        <input type="hidden" name="product_id" value="<?= $products["id"]; ?>" />
+                        <input type="hidden" name="price" value="<?= $products["price"]; ?>" />
                         <input type="hidden" name="editor_by" value="<?= $products["user_id"]; ?>" />
-                        <input type="hidden" name="user_id" value= "<?= $_SESSION['user']['id']; ?>"/>
-                        <input type="hidden" name="product_title" value="<?= $products["title"];?>"/>
-                        <input type="hidden" name="product_price" value="<?= $products["price"];?>">
-                        <input type="hidden" name="product_image_url" value="<?= $products['image_url']; ?>">
-                        <button type="submit" class="btn btn-primary">Done</button>
-                      </form>
-                    </div>
+                        <button type="submit" class="btn btn-primary">Buy</button>
+                      </div>
+                    </form>
                   </div>
                 </div>
               </div>
@@ -113,21 +99,23 @@ if ( isset( $_GET['id'] ) ) {
         <div class=" mx-auto">
           <h4>Comments</h4>
           <div class="overflow-scroll" style="height: 400px;">
-            <?php 
-            $sql = "SELECT
-              comments.*,
-              users.name
-              FROM comments
-              JOIN users
-              ON comments.user_id = users.id
-              WHERE product_id = :product_id ORDER BY id DESC";
-            $query = $database->prepare($sql);
-            $query->execute([
-              "product_id" => $products["id"]
-            ]);
-            $comments = $query->fetchAll();
+          <?php 
+          $sql = "SELECT
+            comments.*,
+            users.name 
+            FROM comments
+            JOIN users
+            ON comments.user_id = users.id
+            WHERE product_id = :product_id ORDER BY id DESC";
+          $query = $database->prepare($sql);
+          $query->execute([
+            "product_id" => $products["id"]
             
-            foreach($comments as $comment): ?>
+          ]);
+          $comments = $query->fetchAll();
+          
+          foreach($comments as $comment): ?>
+            
               <div class="card mb-3" style="width: 500px;">
                 <div class="card-header">
                   <?= $comment['name']; ?>
@@ -135,8 +123,8 @@ if ( isset( $_GET['id'] ) ) {
                 <div class="card-body">
                   <blockquote class="blockquote mb-0">
                     <p><?= $comment['comment']; ?></p>
-                    <!-- <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer> -->
-                  <?php if ( isUserLoggedIn() ) : ?>
+                  <?php if(isUserLoggedIn()):?>
+                    <?php if ( isEditorOrAdmin() OR $_SESSION["user"]["id"] === $comment['user_id']) : ?>
                     <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete-modal-<?= $comment['user_id']; ?>">
                       <i class="bi bi-trash"></i>
                     </button>
@@ -163,6 +151,7 @@ if ( isset( $_GET['id'] ) ) {
                         </div>
                       </div>
                     </div>
+                    <?php endif; ?>
                   <?php endif; ?>
                   </blockquote>
                 </div>
@@ -177,7 +166,7 @@ if ( isset( $_GET['id'] ) ) {
                 >
                 <div class="mt-3">
                     <label for="comments" class="form-label">Enter your comment below:</label>
-                    <textarea class="form-control" id="comments" rows="3" name="comments"></textarea>
+                    <textarea class="form-control" style="width: 500px;" id="comments" rows="3" name="comments"></textarea>
                 </div>
                 <input type="hidden" name="product_id" value="<?= $products['id']; ?>" />
                 <input type="hidden" name="user_id" value="<?= $_SESSION['user']['id']; ?>" />

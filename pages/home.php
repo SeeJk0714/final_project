@@ -26,21 +26,20 @@
     <?php foreach ($products as $product):?>
       <div class="col">
         <div class="card h-100">
-          <img
-            src="<?= $product['image_url']; ?>"
-            class="card-img-top"
-            alt="Product <?= $product['id']; ?>"
-            style="height: 250px;"
-          />
-          <div class="container">
-            <h5 class="card-title"><?= $product['title']; ?></h5>
-            <p class="card-text">
-              RM<?= $product["price"]; ?>
-            </p>
-          </div>
-          <div class="text-end">
-            <a href="/product?id=<?= $product['id']; ?>" class="btn btn-sm">Read More</a>
-          </div>
+          <a href="/product?id=<?= $product['id']; ?>" class="btn text-start">
+            <img
+              src="<?= $product['image_url']; ?>"
+              class="card-img-top"
+              alt="Product <?= $product['id']; ?>"
+              style="height: 250px;"
+            />
+            <div class="container">
+              <h5 class="card-title"><?= $product['title']; ?></h5>
+              <p class="card-text">
+                RM<?= $product["price"]; ?>
+              </p>
+            </div>
+          </a>
         </div>
       </div>
     <?php endforeach ;?>

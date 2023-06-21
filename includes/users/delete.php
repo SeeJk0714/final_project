@@ -26,6 +26,12 @@
 
     $_SESSION["success"] = "The user has been deleted.";
 
-    header("Location: /manage-users");
-    exit;
+    if(isAdmin()){
+        header("Location: /manage-users");
+        exit;
+    }else{
+        header("Location: /logout");
+        exit;
+    }
+        
 

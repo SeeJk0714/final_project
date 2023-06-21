@@ -6,7 +6,7 @@
 
     $database = connectToDB();
 
-    $id = $_POST["id"];
+    $id = $_POST["cart_id"];
 
     if(empty($id)){
         $error = "ERROR!";

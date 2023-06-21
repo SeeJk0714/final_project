@@ -51,9 +51,8 @@
             />
           </div>
           <div class="mb-3">
-            <label for="product-price" class="form-label">Price</label>
-            RM
-            <textarea class="form-control" id="product-price" rows="10" name="price"><?= $product["price"]; ?></textarea>
+            <label for="product-price" class="form-label">Price (RM)</label>
+            <input type="text" class="form-control" id="product-price" name="price" value="<?= $product["price"]; ?>"/>
           </div>
           <div class="mb-3">
             <label for="product-image_url" class="form-label">Image_url</label>
