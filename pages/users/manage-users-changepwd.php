@@ -1,10 +1,8 @@
 <?php
-   // check if the current user is an admin or not
-  // if(!isEditorOrAdmin()){
-  //   // if current user is not an admin, redirect to dashboard
-  //     header("Location: /dashboard");
-  //     exit;
-  //   }
+  if ( !isUserLoggedIn() ) {
+    header("Location: /");
+    exit;
+  }
 
   if ( isset( $_GET['id'] ) ) {
     $database = connectToDB();
@@ -27,6 +25,11 @@
 
   require "parts/header.php";
 ?>
+    <div class=" mt-3 position-absolute">
+      <a href="/manage-users" class="btn fs-1 "
+        ><i class="bi bi-arrow-left-circle"></i></a
+      >
+    </div>
     <div class="container mx-auto my-5" style="max-width: 700px;">
       <div class="d-flex justify-content-between align-items-center mb-2">
         <h1 class="h1">Change Password</h1>
@@ -61,11 +64,6 @@
             </button>
           </div>
         </form>
-      </div>
-      <div class="text-center">
-        <a href="/manage-users" class="btn btn-link btn-sm"
-          ><i class="bi bi-arrow-left"></i> Back to Users</a
-        >
       </div>
     </div>
 

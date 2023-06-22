@@ -1,5 +1,9 @@
 <?php
-    // call db class
+    if ( !isUserLoggedIn() ) {
+        header("Location: /");
+        exit;
+    }
+
     $database = connectToDB();
 
     $total_amount = $_POST['total_amount'];

@@ -1,5 +1,4 @@
 <?php
-     // make sure the user is logged in
      if ( !isEditorOrAdmin()) {
         header("Location: /");
         exit;

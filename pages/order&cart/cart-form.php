@@ -59,6 +59,11 @@
 
   require "parts/header.php";
 ?>
+    <div class=" mt-3 position-absolute">
+      <a href="/dashboard" class="btn fs-1 "
+        ><i class="bi bi-arrow-left-circle"></i></a
+      >
+    </div>
     <?php if(isEditorOrAdmin()) :?>
       <div class="container mx-auto my-5" style="max-width: 1000px;">
         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -79,6 +84,11 @@
               </tr>
             </thead>
             <tbody>
+              <?php if ( empty( $products_in_cart ) ) : ?>
+                  <tr>
+                      <td colspan="5">The Cart Form is empty.</td>
+                  </tr>
+              <?php else : ?>
               <?php foreach($products_in_cart as $cart): ?>
               <tr>
                 <?php if($cart['order_id'] === NULL) :?>
@@ -115,6 +125,7 @@
                 <?php endif ;?>
               </tr>
             <?php endforeach; ?>
+            <?php endif ;?>
             </tbody>
           </table>
         </div>
@@ -129,7 +140,6 @@
                     <h1 class="h1">My Cart</h1>
                 </div>
     
-                <!-- List of products user added to cart -->
                 <table class="table table-hover table-bordered table-striped table-light">
                     <thead>
                         <tr>
@@ -141,7 +151,6 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <!-- if no products in the cart -->
                     <?php if ( empty( $products_in_cart ) ) : ?>
                         <tr>
                             <td colspan="5">Your cart is empty.</td>
@@ -186,7 +195,6 @@
                 
                 <div class="d-flex justify-content-between align-items-center my-3">
                     <a href="/" class="btn btn-light btn-sm">Continue Shopping</a>
-                    <!-- if there is product in cart, then only display the checkout button -->
                     <?php if ( !empty( $products_in_cart ) ) : ?>
                         <form
                             method="POST"
@@ -200,11 +208,6 @@
             </div>
         </div>
     <?php endif ;?>
-      <div class="text-center">
-        <a href="/dashboard" class="btn btn-link btn-sm"
-          ><i class="bi bi-arrow-left"></i> Back to Dashboard</a
-        >
-      </div>
 
 <?php
   require "parts/footer.php";

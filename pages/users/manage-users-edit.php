@@ -1,27 +1,20 @@
 <?php
-   // check if the current user is an admin or not
-  // if(!isAdmin()){
-  //   // if current user is not an admin, redirect to dashboard
-  //     header("Location: /dashboard");
-  //     exit;
-  //   }
+if ( !isUserLoggedIn() ) {
+  header("Location: /");
+  exit;
+}
 
-   // make sure the id parameter is available in the url
    if ( isset( $_GET['id'] ) ) {
-    // load database
     $database = connectToDB();
 
-    // load the user data based on the id
     $sql = "SELECT * FROM users WHERE id = :id";
     $query = $database->prepare( $sql );
     $query->execute([
       'id' => $_GET['id']
     ]);
 
-    // fetch
     $user = $query->fetch();
 
-    //make sure user data us found database
     if(! $user){
       header("Location: /manage-users");
     }
@@ -31,6 +24,11 @@
   }
   require "parts/header.php";
 ?>
+    <div class=" mt-3 position-absolute">
+      <a href="/manage-users" class="btn fs-1 "
+        ><i class="bi bi-arrow-left-circle"></i></a
+      >
+    </div>
     <div class="container mx-auto my-5" style="max-width: 700px;">
       <div class="d-flex justify-content-between align-items-center mb-2">
         <h1 class="h1">Edit User</h1>
@@ -67,11 +65,6 @@
             <button type="submit" class="btn btn-primary">Update</button>
           </div>
         </form>
-      </div>
-      <div class="text-center">
-        <a href="/manage-users" class="btn btn-link btn-sm"
-          ><i class="bi bi-arrow-left"></i> Back to Users</a
-        >
       </div>
     </div>
 

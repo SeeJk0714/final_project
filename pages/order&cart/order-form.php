@@ -1,5 +1,4 @@
 <?php
-  // make sure the user is logged in
   if ( !isUserLoggedIn() ) {
     header("Location: /");
     exit;
@@ -8,7 +7,6 @@
   $database = connectToDB();
   
   if ( isAdmin()){
-    // $sql = "SELECT * FROM products";
     $sql = "SELECT 
     orders.*, 
     users.name AS user_name,
@@ -46,11 +44,16 @@
         'user_id' => $_SESSION['user']['id']
     ]);
   }
-  //fetch the data from query
+  
   $orders = $query->fetchAll();
 
   require "parts/header.php";
 ?> 
+  <div class=" mt-3 position-absolute">
+  <a href="/dashboard" class="btn fs-1 "
+    ><i class="bi bi-arrow-left-circle"></i></a
+  >
+  </div>
   <?php if(isAdmin()) :?>
     <div class="container mx-auto my-5" style="max-width: 700px;">
       <div class="d-flex justify-content-between align-items-center mb-2">
@@ -226,7 +229,6 @@
           <h1 class="h1">My Orders</h1>
         </div>
 
-        <!-- List of orders placed by user in table format -->
         <table
           class="table table-hover table-bordered table-striped table-light"
         >
@@ -287,11 +289,6 @@
       </div>
     </div>
   <?php endif ;?>
-    <div class="text-center">
-      <a href="/dashboard" class="btn btn-link btn-sm"
-        ><i class="bi bi-arrow-left"></i> Back to Dashboard</a
-      >
-    </div>
 <?php
   require "parts/footer.php";
 

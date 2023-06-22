@@ -1,4 +1,8 @@
 <?php
+  if ( !isEditorOrAdmin() ) {
+    header("Location: /");
+    exit;
+  }
 
   require "parts/header.php";
 ?>

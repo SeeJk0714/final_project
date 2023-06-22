@@ -1,5 +1,4 @@
 <?php
-  // make sure the user is logged in
   if ( !isEditorOrAdmin() ) {
     header("Location: /");
     exit;
@@ -8,7 +7,6 @@
   $database = connectToDB();
   
   if ( isAdmin()){
-    // $sql = "SELECT * FROM products";
     $sql = "SELECT 
     products.*, 
     users.name AS user_name,
@@ -19,7 +17,6 @@
     $query = $database->prepare($sql);
     $query->execute();
   }else{
-    // $sql = "SELECT * FROM products where user_id = :user_id";
     $sql = "SELECT 
         products.id, 
         products.title, 
@@ -35,11 +32,16 @@
       'user_id' => $_SESSION["user"]["id"]
     ]);
   }
-  //fetch the data from query
+  
   $products = $query->fetchAll();
 
   require "parts/header.php";
 ?>
+    <div class=" mt-3 position-absolute">
+      <a href="/dashboard" class="btn fs-1 "
+        ><i class="bi bi-arrow-left-circle"></i></a
+      >
+    </div>
     <div class="container mx-auto my-5" style="max-width: 700px;">
       <div class="d-flex justify-content-between align-items-center mb-2">
         <h1 class="h1">Manage Products</h1>
@@ -104,7 +106,6 @@
                   <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#delete-modal-<?= $product['id']; ?>">
                     <i class="bi bi-trash"></i>
                   </button>
-                  <!-- Modal -->
                   <div class="modal fade" id="delete-modal-<?= $product['id']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                       <div class="modal-content">
@@ -131,11 +132,6 @@
           <?php endforeach; ?>
           </tbody>
         </table>
-      </div>
-      <div class="text-center">
-        <a href="/dashboard" class="btn btn-link btn-sm"
-          ><i class="bi bi-arrow-left"></i> Back to Dashboard</a
-        >
       </div>
     </div>
 

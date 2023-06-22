@@ -1,8 +1,6 @@
 <?php
   
-  // check if the current user is an admin or not
   if(!isUserLoggedIn()){
-  // if current user is not an admin, redirect to dashboard
     header("Location: /dashboard");
     exit;
   }
@@ -27,6 +25,11 @@
 
   require "parts/header.php";
 ?>
+    <div class=" mt-3 position-absolute">
+      <a href="/dashboard" class="btn fs-1 "
+        ><i class="bi bi-arrow-left-circle"></i></a
+      >
+    </div>
     <div class="container mx-auto my-5" style="max-width: 700px;">
       <div class="d-flex justify-content-between align-items-center mb-2">
         <h1 class="h1"><?= $_SESSION['usertitle']; ?></h1>
@@ -114,11 +117,6 @@
             <?php endforeach; ?>
           </tbody>
         </table>
-      </div>
-      <div class="text-center">
-        <a href="/dashboard" class="btn btn-link btn-sm"
-          ><i class="bi bi-arrow-left"></i> Back to Dashboard</a
-        >
       </div>
     </div>
 

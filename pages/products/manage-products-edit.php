@@ -1,15 +1,12 @@
 <?php
-  // make sure the user is logged in
-  if ( !isUserLoggedIn() ) {
+  if ( !isEditorOrAdmin() ) {
     header("Location: /");
     exit;
   }
 
   if ( isset( $_GET['id'] ) ) {
-    // load database
     $database = connectToDB();
 
-    // load the product data based on the id
     $sql = "SELECT
     products.*,
     users.name
@@ -17,13 +14,11 @@
     JOIN users
     ON products.modified_by = users.id
     WHERE products.id = :id";
-    // $sql = "SELECT * FROM products WHERE id = :id";
     $query = $database->prepare( $sql );
     $query->execute([
       'id' => $_GET['id']
     ]);
 
-    // fetch
     $product = $query->fetch();
 
   }else{
@@ -74,14 +69,6 @@
           <div class="mb-3">
             Last modified by: 
               <?php 
-                // $sql = "SELECT * FROM users where id = :id";
-                // $query = $database->prepare( $sql );
-                // $query->execute([
-                //   'id' => $product["modified_by"]
-                // ]);
-                // $user = $query->fetch();
-                // echo $user["name"];
-
                 echo $product["name"];
               ?> 
               on ( <?= $product["modified_at"]; ?> )

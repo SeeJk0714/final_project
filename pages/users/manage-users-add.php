@@ -1,13 +1,16 @@
 <?php
-   // check if the current user is an admin or not
   if(!isEditorOrAdmin()){
-    // if current user is not an admin, redirect to dashboard
       header("Location: /dashboard");
       exit;
     }
 
   require "parts/header.php";
 ?>
+    <div class=" mt-3 position-absolute">
+      <a href="/manage-users" class="btn fs-1 "
+        ><i class="bi bi-arrow-left-circle"></i></a
+      >
+    </div>
     <div class="container mx-auto my-5" style="max-width: 700px;">
       <div class="d-flex justify-content-between align-items-center mb-2">
         <h1 class="h1">Add New User</h1>
@@ -62,11 +65,6 @@
             <button type="submit" class="btn btn-primary">Add</button>
           </div>
         </form>
-      </div>
-      <div class="text-center">
-        <a href="/manage-users" class="btn btn-link btn-sm"
-          ><i class="bi bi-arrow-left"></i> Back to Users</a
-        >
       </div>
     </div>
 

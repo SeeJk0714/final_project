@@ -12,7 +12,12 @@
     $_SESSION['usericon'] = "bi bi-person-fill-gear";
   }
   require "parts/header.php";
-?>
+?>  
+    <div class=" mt-3 position-absolute">
+      <a href="/" class="btn fs-1 "
+        ><i class="bi bi-arrow-left-circle"></i></a
+      >
+    </div>
     <div class="container mx-auto my-5" style="max-width: 800px;">
       <h1 class="h1 mb-4 text-center">Dashboard</h1>
       <div class="row">
@@ -86,11 +91,6 @@
             </div>
           </div>
         </div>
-      </div>
-      <div class="mt-4 text-center">
-        <a href="/" class="btn btn-link btn-sm"
-          ><i class="bi bi-arrow-left"></i> Back</a
-        >
       </div>
     </div>
 

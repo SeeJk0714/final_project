@@ -22,7 +22,7 @@ if ( isset( $_GET['id'] ) ) {
 
   require "parts/header.php";
 ?>
-    <div class=" mt-3">
+    <div class=" mt-3 position-absolute">
       <a href="/" class="btn fs-1 "
         ><i class="bi bi-arrow-left-circle"></i></a
       >
@@ -61,33 +61,6 @@ if ( isset( $_GET['id'] ) ) {
                         <input type="hidden" name="product_id" value="<?= $products["id"]; ?>" />
                         <input type="hidden" name="editor_by" value="<?= $products["user_id"]; ?>" />
                         <button type="submit" class="btn btn-primary">Add</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-              </div>
-              <!-- Buy Now -->
-              <button class="btn btn-primary" data-bs-target="#buy-modal-<?= $products["id"];?>" data-bs-toggle="modal">Buy Now</button>
-              <div class="modal fade" id="buy-modal-<?= $products["id"];?>" aria-hidden="true" data-bs-backdrop="static" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalToggleLabel">Buy Now</h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <form method="POST" action="/orders/add">
-                      <div class="modal-body">
-                        Are you sure want to buy "<?= $products["title"]; ?>".
-                        <img src="<?= $products['image_url']; ?>" alt="<?= $products['title']; ?>.image" style="height: 400px;">
-                        <label for="amount">Amount(limit 10) :</label>
-                        <input type="number" id="amount" name="amount" style="width: 50px;" min="0" max="10">
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-                        <input type="hidden" name="product_id" value="<?= $products["id"]; ?>" />
-                        <input type="hidden" name="price" value="<?= $products["price"]; ?>" />
-                        <input type="hidden" name="editor_by" value="<?= $products["user_id"]; ?>" />
-                        <button type="submit" class="btn btn-primary">Buy</button>
                       </div>
                     </form>
                   </div>
@@ -178,4 +151,3 @@ if ( isset( $_GET['id'] ) ) {
     </div>
 <?php
   require "parts/footer.php";
-

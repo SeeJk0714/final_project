@@ -50,19 +50,10 @@ switch($path){
     case 'carts/delete':
         require 'includes/carts/delete.php';
         break;
-    case 'carts/add2':
-        require 'includes/carts/add2.php';
-        break;
     case 'carts/checkout':
         require 'includes/carts/checkout.php';
         break;
-    case 'carts/order':
-        require 'includes/carts/order.php';
-        break;
     //orders
-    case 'orders/add':
-        require 'includes/orders/add.php';
-        break;
     case 'orders/delete':
         require 'includes/orders/delete.php';
         break;
@@ -95,9 +86,6 @@ switch($path){
     case 'manage-products-edit':
         require 'pages/products/manage-products-edit.php';
         break;
-    case 'add-comment':
-        require 'pages/products/add-comment.php';
-        break;
     //user
     case 'manage-users':
         require 'pages/users/manage-users.php';
@@ -115,14 +103,8 @@ switch($path){
     case 'cart-form':
         require 'pages/order&cart/cart-form.php';
         break;
-    case 'cart-form2':
-        require 'pages/order&cart/cart-form2.php';
-        break;
     case 'order-form':
         require 'pages/order&cart/order-form.php';
-        break;
-    case 'order-form2':
-        require 'pages/order&cart/order-form2.php';
         break;
     default:
         require 'pages/home.php';
