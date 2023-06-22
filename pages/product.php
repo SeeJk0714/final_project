@@ -53,7 +53,7 @@ if ( isset( $_GET['id'] ) ) {
                         Are you comfirm add "<?= $products["title"]; ?>" to your Cart.
                         <img src="<?= $products['image_url']; ?>" alt="<?= $products['title']; ?>.image" style="height: 400px;"><br/>
                         <label for="amount">Amount(limit 10) :</label>
-                        <input type="number" id="amount" name="amount" style="width: 50px;" min="0" max="10">
+                        <input type="number" id="amount" name="amount" value="1" style="width: 50px;" min="0" max="10">
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
